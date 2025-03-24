@@ -39,7 +39,7 @@ jobs:
               name: 'automerge-disabled'
             })
       - name: Add automerge-disabled when needed
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: ${{ env.AUTOMERGE_ENABLED == '0' }}
         continue-on-error: true
         with:
@@ -91,7 +91,7 @@ jobs:
             });
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@e9aba2c848f5ebd159c070c61ea2c4e2b122355e # v2
         with:
           python-version: '3.x'
       - name: Install dependencies
@@ -409,7 +409,7 @@ jobs:
               labels: [ 'allow/operator-recreate' ]
             })
       - name: "Inform user that UpdateGraph is not present (semver mode)"
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@a96c578acba98b60f16c6866d5f20478dc4ef68b # v1
         continue-on-error: true
         if: steps.op-traffic-light.outputs.opp_update_graph == '0' 
         with:

@@ -37,7 +37,7 @@ jobs:
 
       - name: Merge command handler
         id: command
-        uses: xt0rted/slash-command-action@v1
+        uses: xt0rted/slash-command-action@865ee04a1dfc8aa2571513eee8e84b5377153511 # v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           command: merge
@@ -84,7 +84,7 @@ jobs:
             })
 
       - name: Message when dco-failed is missing
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: |
           steps.command.outputs.command-name == 'merge' &&
           steps.command.outputs.command-arguments == 'possible' &&

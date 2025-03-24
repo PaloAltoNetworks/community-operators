@@ -32,12 +32,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2
       - id: files
-        uses: jitterbit/get-changed-files@v1
+        uses: jitterbit/get-changed-files@b17fbb00bdc0c0f63fcf166580804b4d2cdc2a42 # v1
         continue-on-error: true
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@e9aba2c848f5ebd159c070c61ea2c4e2b122355e # v2
         with:
           python-version: '3.x'
       - name: Install dependencies
@@ -74,7 +74,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: DCO Check
-        uses: tim-actions/dco@v1.0
+        uses: tim-actions/dco@864a05d479dd120ad795f99a23599f70d9c5ac63 # v1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commits: ${{ steps.get-pr-commits.outputs.commits }}
@@ -94,7 +94,7 @@ jobs:
         run: |
           mkdir -p ./pr
           echo ${{ github.event.number }} > ./pr/NR
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         with:
           name: pr
           path: pr/

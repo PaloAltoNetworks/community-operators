@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Remove automerge-disabled when needed
         if: ${{ env.AUTOMERGE_ENABLED == '1' }}
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         continue-on-error: true
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -39,7 +39,7 @@ jobs:
               name: 'automerge-disabled'
             })
       - name: Add automerge-disabled when needed
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: ${{ env.AUTOMERGE_ENABLED == '0' }}
         continue-on-error: true
         with:
@@ -63,7 +63,7 @@ jobs:
       #     repo-token: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: "Remove package-validated"
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: (!contains(github.event.pull_request.labels.*.name, 'do-not-merge/hold'))
         continue-on-error: true
         with:
@@ -77,7 +77,7 @@ jobs:
             })
 
       - name: "Add Assignees"
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: github.event.action == 'opened' || github.event.action == 'reopened'
         continue-on-error: true
         with:
@@ -91,7 +91,7 @@ jobs:
             });
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@e9aba2c848f5ebd159c070c61ea2c4e2b122355e # v2
         with:
           python-version: '3.x'
       - name: Install dependencies
@@ -121,7 +121,7 @@ jobs:
       #     allow-repeats: false
 
       - name: "Remove installation-validated"
-        uses: actions/github-script@v4
+        uses: actions/github-script@10b53a9ec6c222bb4ce97aa6bd2b5f739696b536 # v4
         if: (github.event.action != 'unlabeled')
         continue-on-error: true
         with:
@@ -139,7 +139,7 @@ jobs:
 
       - name: "Mention reviewers if exist"
         if: (steps.op-traffic-light.outputs.opp_pr_revievers != '') && (!contains(github.event.pull_request.labels.*.name, 'allow/ci-changes'))
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@a96c578acba98b60f16c6866d5f20478dc4ef68b # v1
         with:
           message: |
             ${{ steps.op-traffic-light.outputs.opp_pr_revievers }}, please approve as you are original reviewer(s).
@@ -152,7 +152,7 @@ jobs:
 
       - name: "Mention reviewers if ci.yaml was changed"
         if: steps.op-traffic-light.outputs.opp_pr_revievers != '' && steps.op-traffic-light.outputs.opp_ci_yaml_changed == '1'
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@a96c578acba98b60f16c6866d5f20478dc4ef68b # v1
         with:
           message: |
             /hold
@@ -167,7 +167,7 @@ jobs:
 
       - name: "Comment operator test error code [1]"
         if: failure() && steps.op-traffic-light.outputs.opp_error_code == '1'
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@a96c578acba98b60f16c6866d5f20478dc4ef68b # v1
         with:
           message: |
             Overwrite and recreate labels cannot be set at the same time.
@@ -177,7 +177,7 @@ jobs:
 
       - name: "Comment operator test error code [2]"
         if: failure() && steps.op-traffic-light.outputs.opp_error_code == '2'
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@a96c578acba98b60f16c6866d5f20478dc4ef68b # v1
         with:
           message: |
             /hold
@@ -192,7 +192,7 @@ jobs:
 
       - name: "Comment operator test error code [3]"
         if: failure() && steps.op-traffic-light.outputs.opp_error_code == '3'
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@a96c578acba98b60f16c6866d5f20478dc4ef68b # v1
         with:
           message: |
             This PR has changes outside of `operators` directory. Maintainers have to approve it.
@@ -203,7 +203,7 @@ jobs:
 
       - name: "Comment operator test error code [4]"
         if: failure() && steps.op-traffic-light.outputs.opp_error_code == '4'
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@a96c578acba98b60f16c6866d5f20478dc4ef68b # v1
         with:
           message: |
             /hold
@@ -219,7 +219,7 @@ jobs:
 
       - name: "Comment operator test error code [5]"
         if: failure() && steps.op-traffic-light.outputs.opp_error_code == '5'
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@a96c578acba98b60f16c6866d5f20478dc4ef68b # v1
         with:
           message: |
             /hold
@@ -234,7 +234,7 @@ jobs:
       # Please make it automatic (so we set recreate label)
       - name: "Comment operator test error code [6]"
         if: failure() && steps.op-traffic-light.outputs.opp_error_code == '6'
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@a96c578acba98b60f16c6866d5f20478dc4ef68b # v1
         with:
           message: |
             /hold
@@ -248,7 +248,7 @@ jobs:
 
       - name: "Comment operator test error code [7]"
         if: failure() && steps.op-traffic-light.outputs.opp_error_code == '7'
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@a96c578acba98b60f16c6866d5f20478dc4ef68b # v1
         with:
           message: |
             /hold
@@ -261,7 +261,7 @@ jobs:
           allow-repeats: true
       - name: "Comment operator test error code [7]"
         if: steps.op-traffic-light.outputs.opp_dockerfile_changed == '1'
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@a96c578acba98b60f16c6866d5f20478dc4ef68b # v1
         with:
           message: |
             `Dockerfile` or `bundle.Dockerfile` is added/changed. Note that for security reasons none of these files are going to be used when building bundle. Docker file will be generated and all label information is taken from `annotations.yaml`.
@@ -272,7 +272,7 @@ jobs:
 
 
       - name: Update title
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         continue-on-error: true
         if: always() && steps.op-traffic-light.outputs.opp_pr_title != ''
         with:
@@ -286,7 +286,7 @@ jobs:
             })
 
       - name: Handle new operator
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: steps.op-traffic-light.outputs.opp_is_new_operatror == '1'
         continue-on-error: true
         with:
@@ -314,7 +314,7 @@ jobs:
 
       - name: "Comment for cosmetics change error when csv is changed"
         if: failure() && steps.op-verify-modifications.outputs.opp_check_cosmetic == '2'
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@a96c578acba98b60f16c6866d5f20478dc4ef68b # v1
         with:
           message: |
             /hold
@@ -345,7 +345,7 @@ jobs:
 
       - name: "Comment for cosmetics change error"
         if: failure() && steps.op-verify-modifications.outputs.opp_check_cosmetic == '1'
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@a96c578acba98b60f16c6866d5f20478dc4ef68b # v1
         with:
           message: |
             /hold
@@ -361,7 +361,7 @@ jobs:
           allow-repeats: true
 
       - name: "Removing Operator recreate label when exists"
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: steps.op-traffic-light.outputs.opp_set_label_operator_version_overwrite == '1' && contains(github.event.pull_request.labels.*.name, 'allow/operator-recreate')
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -373,7 +373,7 @@ jobs:
               name: 'allow/operator-recreate'
             })
       - name: "Setting Operator version overwrite label"
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: steps.op-traffic-light.outputs.opp_set_label_operator_version_overwrite == '1'
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -385,7 +385,7 @@ jobs:
               labels: [ 'allow/operator-version-overwrite' ]
             })
       - name: "Removing Operator version overwrite label when exists"
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: steps.op-traffic-light.outputs.opp_set_label_operator_recreate == '1' && contains(github.event.pull_request.labels.*.name, 'allow/operator-version-overwrite')
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -397,7 +397,7 @@ jobs:
               name: 'allow/operator-version-overwrite'
             })
       - name: "Setting Operator recreate label"
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: steps.op-traffic-light.outputs.opp_set_label_operator_recreate == '1'
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -409,7 +409,7 @@ jobs:
               labels: [ 'allow/operator-recreate' ]
             })
       - name: "Inform user that UpdateGraph is not present (semver mode)"
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@a96c578acba98b60f16c6866d5f20478dc4ef68b # v1
         continue-on-error: true
         if: steps.op-traffic-light.outputs.opp_update_graph == '0' 
         with:
@@ -426,7 +426,7 @@ jobs:
       #     configuration-path: "${{steps.op-traffic-light.outputs.opp_production_type }}/${{ steps.op-traffic-light.outputs.opp_name }}/ci.yaml"
 
       - name: "Setting authorized-changes label"
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: steps.op-traffic-light.outputs.opp_authorized_changes == '1'
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -475,7 +475,7 @@ jobs:
     steps:
 
       - name: "Remove needs-ok-to-test"
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: always()
         continue-on-error: true
         with:
@@ -493,7 +493,7 @@ jobs:
           echo "needs.operator-ci.outputs.opp_ci_yaml_only: ${{ needs.operator-ci.outputs.opp_ci_yaml_only }}"
 
       - name: "Setting ok-to-test label"
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: needs.operator-ci.outputs.opp_production_type != 'k8s' && needs.operator-ci.outputs.opp_ci_yaml_only != '1' && (!contains(github.event.pull_request.labels.*.name, 'allow/ci-changes'))
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -506,7 +506,7 @@ jobs:
             })
 
       - name: "Setting installation-validated label (opensift+ci_yaml_only)"
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: needs.operator-ci.outputs.opp_production_type != 'k8s' && needs.operator-ci.outputs.opp_ci_yaml_only == '1'
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -518,7 +518,7 @@ jobs:
               labels: [ 'installation-validated' ]
             })
       - name: Try to automerge
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: needs.operator-ci.outputs.opp_production_type != 'k8s' && needs.operator-ci.outputs.opp_ci_yaml_only == '1'
         continue-on-error: true
         with:

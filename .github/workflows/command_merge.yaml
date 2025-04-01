@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - uses: actions/github-script@v4
+      - uses: actions/github-script@10b53a9ec6c222bb4ce97aa6bd2b5f739696b536 # v4
         id: labels
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -37,7 +37,7 @@ jobs:
 
       - name: Merge command handler
         id: command
-        uses: xt0rted/slash-command-action@v1
+        uses: xt0rted/slash-command-action@865ee04a1dfc8aa2571513eee8e84b5377153511 # v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           command: merge
@@ -47,7 +47,7 @@ jobs:
           permission-level: write
 
       - name: Merge message when not able to merge and inform user about authorized_changes
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: |
           steps.command.outputs.command-name == 'merge' &&
           steps.command.outputs.command-arguments == 'possible' &&
@@ -68,7 +68,7 @@ jobs:
             })
 
       - name: Message when automerge is disabled
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: |
           steps.command.outputs.command-name == 'merge' &&
           steps.command.outputs.command-arguments == 'possible' &&
@@ -84,7 +84,7 @@ jobs:
             })
 
       - name: Message when dco-failed is missing
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         if: |
           steps.command.outputs.command-name == 'merge' &&
           steps.command.outputs.command-arguments == 'possible' &&

@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Download artifact'
-        uses: actions/github-script@v3.1.0
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3.1.0
         with:
           script: |
             var artifacts = await github.actions.listWorkflowRunArtifacts({
@@ -41,7 +41,7 @@ jobs:
           PR=$(cat ./NR)
           echo "::set-output name=pr::${PR}"
 
-      - uses: actions/github-script@v4
+      - uses: actions/github-script@10b53a9ec6c222bb4ce97aa6bd2b5f739696b536 # v4
         id: pr-labels
         continue-on-error: true
         with:
@@ -63,7 +63,7 @@ jobs:
     steps:
       - name: "Removing dco-failed label"
         if: needs.pr.outputs.pr != '0'
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         continue-on-error: true
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -97,7 +97,7 @@ jobs:
     steps:
 
       - name: "Setting dco-failed label"
-        uses: actions/github-script@v3
+        uses: actions/github-script@ffc2c79a5b2490bd33e0a41c1de74b877714d736 # v3
         continue-on-error: true
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
